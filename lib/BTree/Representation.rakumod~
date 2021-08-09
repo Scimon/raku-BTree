@@ -1,3 +1,0 @@
-role Btree::Representation {
-    method gist {...}
-}

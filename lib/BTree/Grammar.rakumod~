@@ -1,5 +1,0 @@
-grammar BTreeGrammar {
-    token TOP { <tree> };
-    token tree { <value> ["(" $<left>=<tree> ")"]? ["(" $<right>=<tree> ")"]? };
-    regex value { <-[()]>+ }
-}
