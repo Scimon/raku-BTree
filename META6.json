@@ -1,5 +1,5 @@
 {
-  "auth": "Scimon",
+  "auth": "zef:Scimon",
   "authors": [
     "Scimon Proctor"
   ],
@@ -12,7 +12,10 @@
   "name": "BTree",
   "perl": "6.d",
   "provides": {
-    "BTree": "lib/BTree.rakumod"
+    "BTree": "lib/BTree.rakumod",
+    "BTree::Grammar": "lib/BTree/Grammar.rakumod",
+    "BTree::PrettyTree": "lib/BTree/PrettyTree.rakumod",
+    "BTree::Representation": "lib/BTree/Representation.rakumod"
   },
   "resources": [
   ],

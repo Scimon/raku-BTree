@@ -1,7 +1,7 @@
 use BTree::PrettyTree;
 use BTree::Grammar;
 
-role BTree:ver<0.0.1>:auth<Scimon>[::T=Any,::R=BTree::PrettyTree] is export {
+role BTree:ver<0.0.1>:auth<zef:Scimon>[::T=Any,::R=BTree::PrettyTree] is export {
 
     has T $.value is required;
     has BTree @!nodes[2];
