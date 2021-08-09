@@ -1,4 +1,5 @@
 {
+  "auth": "Scimon",
   "authors": [
     "Scimon Proctor"
   ],
@@ -6,7 +7,7 @@
   ],
   "depends": [
   ],
-  "description": "blah blah blah",
+  "description": "Simple Binary Tree Role with pretty printing",
   "license": "Artistic-2.0",
   "name": "BTree",
   "perl": "6.d",
@@ -15,7 +16,7 @@
   },
   "resources": [
   ],
-  "source-url": "",
+  "source-url": "https://github.com/Scimon/raku-BTree.git",
   "tags": [
   ],
   "test-depends": [

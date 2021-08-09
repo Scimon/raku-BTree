@@ -2,3 +2,5 @@ Revision history for BTree
 
 {{$NEXT}}
     - Initial version
+    - Basically a slightly tidied up version of the code I've used a few times in the weekly challenge.
+    - More planned (including... you know... tests and more documentation).
