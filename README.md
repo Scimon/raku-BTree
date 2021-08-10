@@ -28,7 +28,7 @@ BTree
 -----
 
 ```raku
-role BTree[::ValueType=Any,::Renderer=BTree::PrettyTree]
+role BTree[::ValueType=Any,BTree::Renderer :$gist-renderer=BTree::PrettyTree]
 ```
 
 The BTree `Role` accepts two parameters : 
@@ -37,9 +37,14 @@ The BTree `Role` accepts two parameters :
 
 The type of object it should allow (defaulting to Any)
 
-**Renderer**
+**:$gist-renderer**
 
-An output renderer. The default for this is BTree::PrettyTree but any class that does BTree::Renderer will work.
+An output renderer used for creating the BTree's gist representation. The default for this is BTree::PrettyTree but any class that does BTree::Renderer will work.
+
+class Mu $
+----------
+
+Output generator for c<gist>
 
 ### method Str
 

@@ -15,7 +15,7 @@
     "BTree": "lib/BTree.rakumod",
     "BTree::Grammar": "lib/BTree/Grammar.rakumod",
     "BTree::PrettyTree": "lib/BTree/PrettyTree.rakumod",
-    "BTree::Representation": "lib/BTree/Representation.rakumod"
+    "BTree::Renderer": "lib/BTree/Renderer.rakumod"
   },
   "resources": [
   ],

@@ -34,7 +34,7 @@ It's intended to be a basis for a series of different types for trees.
 =head2 BTree
 
 =begin code :lang<raku>
-role BTree[::ValueType=Any,::Renderer=BTree::PrettyTree]
+role BTree[::ValueType=Any,BTree::Renderer :$gist-renderer=BTree::PrettyTree]
 =end code
 
 The BTree C<Role> accepts two parameters : 
@@ -42,15 +42,16 @@ The BTree C<Role> accepts two parameters :
 =defn ValueType
 The type of object it should allow (defaulting to Any) 
 
-=defn Renderer
-An output renderer. The default for this is BTree::PrettyTree 
-but any class that does BTree::Renderer will work.
+=defn :$gist-renderer
+An output renderer used for creating the BTree's gist representation. 
+The default for this is BTree::PrettyTree  but any class that does 
+BTree::Renderer will work.
 
 =end pod
 
 role BTree:ver<0.0.1>:auth<zef:Scimon>[
-    ::ValueType=Any, #= Node value type
-    ::Renderer=BTree::PrettyTree #= Output generator for c<gist>
+    ::ValueType = Any, #= Node value type
+    BTree::Renderer :$gist-renderer =BTree::PrettyTree #= Output generator for c<gist>
 ] is export {
 
     has ValueType $.value is required;
@@ -79,7 +80,7 @@ role BTree:ver<0.0.1>:auth<zef:Scimon>[
     }
     
     method gist() {
-        Renderer.new( tree=>self ).gist();
+        $gist-renderer.new( tree=>self ).render();
     }
     
     method raku() {

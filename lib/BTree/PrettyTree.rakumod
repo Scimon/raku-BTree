@@ -51,7 +51,7 @@ class BTree::PrettyTree does BTree::Renderer {
         $!join-point = $left-pad + ( $tree.value.Str.codes div 2);
     }
     
-    method gist {
+    method render {
         @.data.join("\n");
     }
 }
