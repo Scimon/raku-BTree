@@ -1,6 +1,4 @@
 use Test;
-use BTree;
-
-pass "replace me";
+use-ok("BTree");
 
 done-testing;

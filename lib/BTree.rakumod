@@ -1,17 +1,68 @@
 use BTree::PrettyTree;
 use BTree::Grammar;
 
-role BTree:ver<0.0.1>:auth<zef:Scimon>[::T=Any,::R=BTree::PrettyTree] is export {
+=begin pod
 
-    has T $.value is required;
+=head1 NAME
+
+BTree - Simple Binary Tree Role with pretty printing
+
+=head1 SYNOPSIS
+
+=begin code :lang<raku>
+
+use BTree;
+class IntTree does BTree[Int] {};
+my IntTree(Str) $tree = "1(2)(3)";
+say $tree;
+
+=end code
+
+=begin code
+
+ 1 
+┌┴┐
+2 3
+
+=end code
+
+=head1 DESCRIPTION
+
+BTree is intended to be a simple role that can be used to represent binary trees. 
+It's intended to be a basis for a series of different types for trees. 
+
+=head2 BTree
+
+=begin code :lang<raku>
+role BTree[::ValueType=Any,::Renderer=BTree::PrettyTree]
+=end code
+
+The BTree C<Role> accepts two parameters : 
+
+=defn ValueType
+The type of object it should allow (defaulting to Any) 
+
+=defn Renderer
+An output renderer. The default for this is BTree::PrettyTree 
+but any class that does BTree::Renderer will work.
+
+=end pod
+
+role BTree:ver<0.0.1>:auth<zef:Scimon>[
+    ::ValueType=Any, #= Node value type
+    ::Renderer=BTree::PrettyTree #= Output generator for c<gist>
+] is export {
+
+    has ValueType $.value is required;
     has BTree @!nodes[2];
     
-    submethod BUILD ( T() :$value, :@nodes ) {
+    submethod BUILD ( ValueType() :$value, :@nodes ) {
         $!value = $value;
         @!nodes = @nodes;
     }
     
-    method Str( ) {
+    #| Returns a Str representation of the tree. 
+    method Str(--> Str ) {
         ( $!value , |@.nodes.map( { "({$_})" } ) ).join("");
     }
     
@@ -28,7 +79,7 @@ role BTree:ver<0.0.1>:auth<zef:Scimon>[::T=Any,::R=BTree::PrettyTree] is export 
     }
     
     method gist() {
-        R.new( tree=>self ).gist();
+        Renderer.new( tree=>self ).gist();
     }
     
     method raku() {
@@ -76,26 +127,6 @@ role BTree:ver<0.0.1>:auth<zef:Scimon>[::T=Any,::R=BTree::PrettyTree] is export 
 
 }
 =begin pod
-
-=head1 NAME
-
-BTree - Simple Binary Tree Role with pretty printing
-
-=head1 SYNOPSIS
-
-=begin code :lang<raku>
-
-use BTree;
-class IntTree does BTree[Int] {};
-my IntTree(Str) $tree = "1(2)(3)";
-say $tree;
-
-=end code
-
-=head1 DESCRIPTION
-
-BTree is intended to be a simple role that can be used to represent binary trees. It's intended to be a basis for
-a series of different types for trees. 
 
 =head1 AUTHOR
 

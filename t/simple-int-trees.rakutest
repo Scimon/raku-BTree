@@ -1,0 +1,20 @@
+use Test;
+
+use BTree;
+
+class IntTree does BTree[Int] {}
+
+ok my IntTree(Str) $tree = "1(2)(3)";
+ok $tree ~~ IntTree;
+ok $tree ~~ BTree;
+is "1(2)(3)", $tree.Str;
+
+my $pretty = q:to/END/.chomp();
+ 1 
+┌┴┐
+2 3
+END
+
+is $pretty, $tree.gist();
+
+done-testing;

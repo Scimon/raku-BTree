@@ -1,8 +1,8 @@
-use BTree::Representation;
+use BTree::Renderer;
 
 role BTree {...}
 
-class BTree::PrettyTree does BTree::Representation {
+class BTree::PrettyTree does BTree::Renderer {
 
     has @.data;
     has UInt $.join-point;

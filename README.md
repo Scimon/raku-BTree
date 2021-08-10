@@ -15,10 +15,39 @@ my IntTree(Str) $tree = "1(2)(3)";
 say $tree;
 ```
 
+     1 
+    ┌┴┐
+    2 3
+
 DESCRIPTION
 ===========
 
 BTree is intended to be a simple role that can be used to represent binary trees. It's intended to be a basis for a series of different types for trees. 
+
+BTree
+-----
+
+```raku
+role BTree[::ValueType=Any,::Renderer=BTree::PrettyTree]
+```
+
+The BTree `Role` accepts two parameters : 
+
+**ValueType**
+
+The type of object it should allow (defaulting to Any)
+
+**Renderer**
+
+An output renderer. The default for this is BTree::PrettyTree but any class that does BTree::Renderer will work.
+
+### method Str
+
+```raku
+method Str() returns Str
+```
+
+Returns a Str representation of the tree.
 
 AUTHOR
 ======
