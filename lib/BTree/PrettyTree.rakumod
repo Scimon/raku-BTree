@@ -7,7 +7,7 @@ class BTree::PrettyTree does BTree::Renderer {
     has @.data;
     has UInt $.join-point;
 
-    multi submethod BUILD ( BTree :$tree where { ! $tree.children } ) {
+    multi submethod BUILD ( BTree :$tree where { ! $tree.elems } ) {
         @!data = [$tree.value.Str];
         $!join-point = $tree.value.Str.codes div 2;
     }
@@ -22,7 +22,7 @@ class BTree::PrettyTree does BTree::Renderer {
         @ldata = $left.data;
         @ldata.unshift( (" " x $left.join-point) ~ "┌" ~ ("─" x ($left-width - 1 - $left.join-point) ) );
         
-        if ( $tree.children == 2 ) {
+        if ( $tree.elems == 2 ) {
             my $right = BTree::PrettyTree.new( tree => $tree.nodes[1] );
             $mid-string = '┴';
             @rdata = $right.data;
