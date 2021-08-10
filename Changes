@@ -1,6 +1,8 @@
 Revision history for BTree
 
 {{$NEXT}}
+
+0.0.2
     - Tidied up a bunch of documentation
     - Both the Str and gist outputs can be given a renderer Type
     - Removed traverse and reverse for now.

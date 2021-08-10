@@ -95,7 +95,7 @@ a value that can be coered into a BTree of the appropriate C<ValueType>.
 
 =end pod
 
-role BTree:ver<0.0.1>:auth<zef:Scimon>[
+role BTree:ver<0.0.2>:auth<zef:Scimon>[
     ::ValueType = Any, 
     BTree::Renderer :$gist-renderer = BTree::PrettyTree,
     BTree::Renderer :$Str-renderer  = BasicStrRenderer, 
