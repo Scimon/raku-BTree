@@ -1,5 +1,11 @@
 Revision history for BTree
 
+{{$NEXT}}
+    - Tidied up a bunch of documentation
+    - Both the Str and gist outputs can be given a renderer Type
+    - Removed traverse and reverse for now.
+    - renamed count to elems to match other types
+
 0.0.1
     - Initial version
     - Basically a slightly tidied up version of the code I've used a few times in the weekly challenge.
