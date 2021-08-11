@@ -1,5 +1,13 @@
 [![Actions Status](https://github.com/Scimon/raku-BTree/workflows/test/badge.svg)](https://github.com/Scimon/raku-BTree/actions)
 
+
+NOTICE
+======
+
+I realise the naming on this module (intended to be a base Role for building various binary trees on top of is not great). I will be moving the code here into a Tree::Binary module and making a new Tree::BTree module that uses it.
+
+Sorry for any confusion.
+
 NAME
 ====
 
