@@ -109,7 +109,7 @@ my $tree2 = Tree::Binary.from-Str("1(a)(£)");
 
 =end pod
 
-role Binary:ver<0.0.2>:auth<zef:Scimon>[
+role Binary:ver<0.0.3>:auth<zef:Scimon>[
     ::ValueType = Any, 
     Tree::Binary::Role::Renderer :$gist-renderer = PrettyTree,
     Tree::Binary::Role::Renderer :$Str-renderer  = BasicStrRenderer, 

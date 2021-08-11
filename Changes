@@ -1,6 +1,8 @@
 Revision history for BTree
 
 {{$NEXT}}
+
+0.0.3
     - Renamed to Tree::Binary
     - Added elems(:all) and elems(:leaf)
     - Put reverse back in.
