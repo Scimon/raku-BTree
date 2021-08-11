@@ -91,6 +91,18 @@ Where C<value> is a C<Str> that can be coerced into a C<ValueType> and C<node1>
 and C<node2> another C<BTree> representation. The C<Str> method should produce
 a value that can be coered into a BTree of the appropriate C<ValueType>.
 
+Alternate construction options using C<Str> coercion are :
+
+=begin code :lang<raku>
+
+# Coercion from a Str to a BTree
+my BTree(Str) $tree1 = "1(a)(£)";
+
+# Using the from-Str constructor
+my $tree2 = BTree.from-Str("1(a)(£)");
+
+=end code
+
 =head3 Attributes
 
 =end pod
@@ -122,14 +134,38 @@ role BTree:ver<0.0.2>:auth<zef:Scimon>[
         @!nodes = @nodes;
     }
     
+
     #|( Returns the number of defined nodes for the current node.
     Note that the elems method does NOT return the count of all nodes 
     in the tree just the current nodes children. 
     )
-    method elems(--> UInt) {
+    multi method elems(--> UInt) {
         @.nodes.elems;
     }
-    
+
+    multi method elems( Bool :$leaf!, Bool :$all! --> UInt ) {
+        die "The :all and :leaf flags in elems are incompatible";
+    }
+
+    #|( With the :all flag returns the total number of nodes in the tree 
+    including the current one but not any undefined ones.
+    )
+    multi method elems( Bool :$all! --> UInt ) {
+        [+] 1, |self.nodes().map( *.elems(:all) );
+    }
+
+    #|( With the :leaf flag returns the total number of leaf nodes )
+    multi method elems( Bool :$leaf! --> UInt ) {
+        given self.nodes.elems {
+            when 0 {
+                return 1;
+            }
+            default {
+                return [+] |self.nodes().map( *.elems(:leaf) );
+            }
+        }
+    }
+
     #| Returns a Str representation of the tree using the :$Str-renderer parameter 
     method Str(--> Str ) {
         $Str-renderer.new( tree=>self ).render();
@@ -144,35 +180,39 @@ role BTree:ver<0.0.2>:auth<zef:Scimon>[
     method raku(--> Str) {
         "{self.^name}.new( {("value => {$!value}", self.nodes ?? "nodes => {(self.nodes.map(*.raku)).join(", ")}" !! Empty).join(", ")} )";
     }
+
+    method routes() {
+        gather {
+            if ( self.elems ) {
+                for @.nodes -> $n {
+                    for $n.routes -> @t {
+                        take ($!value, |@t);
+                    }
+                }
+            } else {
+                take ( $!value, );
+            }
+        }
+    }
     
-#    method traverse() {
-#        gather {
-#            if ( self.elems ) {
-#                for @.nodes -> $n {
-#                    for $n.traverse -> @t {
-#                        take ($!value, |@t);
-#                    }
-#                }
-#            } else {
-#                take ( $!value, );
-#            }
-#        }
-#    }
-    
-#    multi method reverse( ::?CLASS:D: ) {
-#        self.new(
-#            value => $!value,
-#            nodes => @.nodes.reverse.map( *.reverse )
-#        )
-#    }
+    #|( Returns a new BTree where the node pairs have been swapped at each level )
+    multi method reverse( ::?CLASS:D: --> BTree ) {
+        self.new(
+            value => $!value,
+            nodes => @.nodes.reverse.map( *.reverse )
+        )
+    }
+
+    multi method reverse( ::?CLASS:U: ) { BTree }
     
     method COERCE( Str:D $str --> BTree ) {
         return ::?CLASS.from-Str( $str );
     }
 
-    multi method from-Str('') { BTree }
+    multi method from-Str('' --> BTree ) { BTree }
     
-    multi method from-Str( ::?CLASS:U: Str $in ) {
+    #| Object creation method using the Str coercion rules.
+    multi method from-Str( ::?CLASS:U: Str $in --> BTree ) {
         my $match = BTree::Grammar.parse( $in );
         if ( $match ) {
             self.new(

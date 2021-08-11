@@ -69,6 +69,16 @@ The role also allows for basic string coercion where a tree can be represented w
 
 Where `value` is a `Str` that can be coerced into a `ValueType` and `node1` and `node2` another `BTree` representation. The `Str` method should produce a value that can be coered into a BTree of the appropriate `ValueType`.
 
+Alternate construction options using `Str` coercion are :
+
+```raku
+# Coercion from a Str to a BTree
+my BTree(Str) $tree1 = "1(a)(£)";
+
+# Using the from-Str constructor
+my $tree2 = BTree.from-Str("1(a)(£)");
+```
+
 ### Attributes
 
 ### has ValueType $.value
@@ -97,6 +107,26 @@ method elems() returns UInt
 
 Returns the number of defined nodes for the current node. Note that the elems method does NOT return the count of all nodes in the tree just the current nodes children.
 
+### method elems
+
+```raku
+method elems(
+    Bool :$all!
+) returns UInt
+```
+
+With the :all flag returns the total number of nodes in the tree including the current one but not any undefined ones.
+
+### method elems
+
+```raku
+method elems(
+    Bool :$leaf!
+) returns UInt
+```
+
+With the :leaf flag returns the total number of leaf nodes
+
 ### method Str
 
 ```raku
@@ -120,6 +150,24 @@ method raku() returns Str
 ```
 
 Returns a raku representation of the tree
+
+### method reverse
+
+```raku
+method reverse() returns BTree
+```
+
+Returns a new BTree where the node pairs have been swapped at each level
+
+### method from-Str
+
+```raku
+method from-Str(
+    Str $in
+) returns BTree
+```
+
+Object creation method using the Str coercion rules.
 
 AUTHOR
 ======
