@@ -2,7 +2,7 @@ use Test;
 
 use Tree::Binary;
 
-class IntTree does Tree::Binary[Int] {}
+class IntTree does Tree::Binary[Int] {};
 
 ok my IntTree(Str) $tree = "1(2)(3)";
 ok $tree ~~ IntTree;
