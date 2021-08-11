@@ -33,7 +33,7 @@ Tree::Binary
 role Tree::Binary[
     ::ValueType=Any,
     Tree::Binary::Role::Renderer :$gist-renderer=Tree::Binary::PrettyTree,
-    Tree::Binary::Role::Renderer :$Str-renderer=Tree::Binary::PrettyTree,
+    Tree::Binary::Role::Renderer :$Str-renderer=BasicStrRenderer,
 ]
 ```
 
