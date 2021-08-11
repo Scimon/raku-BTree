@@ -1,29 +1,29 @@
-use BTree::Renderer;
+unit package Tree::Binary;
 
-role BTree {...}
+use Tree::Binary::Role::Renderer;
 
-class BTree::PrettyTree does BTree::Renderer {
+class PrettyTree does Tree::Binary::Role::Renderer is export {
 
     has @.data;
     has UInt $.join-point;
 
-    multi submethod BUILD ( BTree :$tree where { ! $tree.elems } ) {
+    multi submethod BUILD ( Tree::Binary :$tree where { ! $tree.elems } ) {
         @!data = [$tree.value.Str];
         $!join-point = $tree.value.Str.codes div 2;
     }
     
-    multi submethod BUILD ( BTree :$tree ) {
+    multi submethod BUILD ( Tree::Binary :$tree ) {
         my ( $left, $right, $left-width, $right-width );
         my ( @ldata, @rdata, $left-pad, $right-pad );
         
         my $mid-string = '┘';
-        $left = BTree::PrettyTree.new( tree => $tree.nodes[0] );
+        $left = PrettyTree.new( tree => $tree.nodes[0] );
         $left-width = $left.data[0].codes;
         @ldata = $left.data;
         @ldata.unshift( (" " x $left.join-point) ~ "┌" ~ ("─" x ($left-width - 1 - $left.join-point) ) );
         
         if ( $tree.elems == 2 ) {
-            my $right = BTree::PrettyTree.new( tree => $tree.nodes[1] );
+            my $right = PrettyTree.new( tree => $tree.nodes[1] );
             $mid-string = '┴';
             @rdata = $right.data;
             $right-width = @rdata[0].codes;

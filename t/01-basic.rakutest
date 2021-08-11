@@ -1,4 +1,4 @@
 use Test;
-use-ok("BTree");
+use-ok("Tree::Binary");
 
 done-testing;

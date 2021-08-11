@@ -1,24 +1,16 @@
 [![Actions Status](https://github.com/Scimon/raku-BTree/workflows/test/badge.svg)](https://github.com/Scimon/raku-BTree/actions)
 
-
-NOTICE
-======
-
-I realise the naming on this module (intended to be a base Role for building various binary trees on top of is not great). I will be moving the code here into a Tree::Binary module and making a new Tree::BTree module that uses it.
-
-Sorry for any confusion.
-
 NAME
 ====
 
-BTree - Simple Binary Tree Role with pretty printing
+Tree::Binary - Simple Binary Tree Role with pretty printing
 
 SYNOPSIS
 ========
 
 ```raku
-use BTree;
-class IntTree does BTree[Int] {};
+use Tree::Binary;
+class IntTree does Tree::Binary[Int] {};
 my IntTree(Str) $tree = "1(2)(3)";
 say $tree;
 ```
@@ -30,22 +22,22 @@ say $tree;
 DESCRIPTION
 ===========
 
-BTree is intended to be a simple role that can be used to represent binary trees. It's intended to be a basis for a series of different types for trees. 
+Tree::Binary is intended to be a simple role that can be used to represent binary trees. It's intended to be a basis for a series of different types for trees. 
 
-BTree's are immutable, classes that modify the tree should return a new tree object.
+Tree::Binary does not include code for inserting or deleting nodes as this is dependent on the concreate class using it. 
 
-BTree
------
+Tree::Binary
+------------
 
 ```raku
-role BTree[
+role Tree::Binary[
     ::ValueType=Any,
-    BTree::Renderer :$gist-renderer=BTree::PrettyTree,
-    BTree::Renderer :$Str-renderer=BTree::PrettyTree,
+    Tree::Binary::Role::Renderer :$gist-renderer=Tree::Binary::PrettyTree,
+    Tree::Binary::Role::Renderer :$Str-renderer=Tree::Binary::PrettyTree,
 ]
 ```
 
-The BTree `Role` accepts one postional and two named parameters : 
+The Tree::Binary `Role` accepts one postional and two named parameters : 
 
 **ValueType**
 
@@ -53,11 +45,11 @@ The type of object it should allow (defaulting to Any)
 
 **:$gist-renderer**
 
-An output renderer used for creating the BTree's gist representation. The default for this is BTree::PrettyTree but any class that does BTree::Renderer will work.
+An output renderer used for creating the Tree::Binary's gist representation. The default for this is Tree::Binary::PrettyTree but any class that does Tree::Binary::Role::Renderer will work.
 
 **:$Str-renderer**
 
-An output renderer used for creating the BTree's Str representation. The default for this is BasicStrRenderer but any class that does BTree::Renderer will work.
+An output renderer used for creating the Tree::Binary's Str representation. The default for this is BasicStrRenderer but any class that does Tree::Binary::Role::Renderer will work.
 
 ### Construction
 
@@ -67,24 +59,24 @@ The default constructor takes two named arguments :
 
 The value of the current node
 
-**Array[BTree] :@nodes[2]**
+**Array[Tree::Binary] :@nodes[2]**
 
-An array of 0-2 BTree nodes that are the children of the current node.
+An array of 0-2 Tree::Binary nodes that are the children of the current node.
 
 The role also allows for basic string coercion where a tree can be represented with the following structure.
 
     value(node1)(node2)
 
-Where `value` is a `Str` that can be coerced into a `ValueType` and `node1` and `node2` another `BTree` representation. The `Str` method should produce a value that can be coered into a BTree of the appropriate `ValueType`.
+Where `value` is a `Str` that can be coerced into a `ValueType` and `node1` and `node2` another `Tree::Binary` representation. The `Str` method should produce a value that can be coered into a Tree::Binary of the appropriate `ValueType`.
 
 Alternate construction options using `Str` coercion are :
 
 ```raku
-# Coercion from a Str to a BTree
-my BTree(Str) $tree1 = "1(a)(£)";
+# Coercion from a Str to a Tree::Binary
+my Tree::Binary(Str) $tree1 = "1(a)(£)";
 
 # Using the from-Str constructor
-my $tree2 = BTree.from-Str("1(a)(£)");
+my $tree2 = Tree::Binary.from-Str("1(a)(£)");
 ```
 
 ### Attributes
@@ -93,7 +85,7 @@ my $tree2 = BTree.from-Str("1(a)(£)");
 
 The current nodes value
 
-### has Positional[BTree] @!nodes
+### has Positional[Tree::Binary::Role::Tree::Binary] @!nodes
 
 The child nodes
 
@@ -102,7 +94,7 @@ The child nodes
 ### method nodes
 
 ```raku
-method nodes() returns Array[BTree]
+method nodes() returns Array[Tree::Binary::Role::Tree::Binary]
 ```
 
 The child nodes of this node, undefined nodes will not be returned.
@@ -162,17 +154,17 @@ Returns a raku representation of the tree
 ### method reverse
 
 ```raku
-method reverse() returns BTree
+method reverse() returns Tree::Binary::Role::Tree::Binary
 ```
 
-Returns a new BTree where the node pairs have been swapped at each level
+Returns a new Tree::Binary where the node pairs have been swapped at each level
 
 ### method from-Str
 
 ```raku
 method from-Str(
     Str $in
-) returns BTree
+) returns Tree::Binary::Role::Tree::Binary
 ```
 
 Object creation method using the Str coercion rules.

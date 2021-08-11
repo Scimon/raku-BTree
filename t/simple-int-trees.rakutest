@@ -1,12 +1,12 @@
 use Test;
 
-use BTree;
+use Tree::Binary;
 
-class IntTree does BTree[Int] {}
+class IntTree does Tree::Binary[Int] {}
 
 ok my IntTree(Str) $tree = "1(2)(3)";
 ok $tree ~~ IntTree;
-ok $tree ~~ BTree;
+ok $tree ~~ Tree::Binary;
 is "1(2)(3)", $tree.Str;
 
 my $pretty = q:to/END/.chomp();
@@ -20,7 +20,7 @@ is $tree.elems, 2;
 is $tree.elems(:all), 3;
 is $tree.elems(:leaf), 2;
 
-my $tree2 = BTree.from-Str("1(2(3))(4(5)(6))");
+my $tree2 = Tree::Binary.from-Str("1(2(3))(4(5)(6))");
 
 is $tree2.elems, 2;
 is $tree2.elems(:all), 6;

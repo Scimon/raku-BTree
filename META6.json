@@ -9,7 +9,7 @@
   ],
   "description": "Simple Binary Tree Role with pretty printing",
   "license": "Artistic-2.0",
-  "name": "BTree",
+  "name": "Tree::Binary",
   "perl": "6.d",
   "provides": {
     "BTree": "lib/BTree.rakumod",
@@ -19,7 +19,7 @@
   },
   "resources": [
   ],
-  "source-url": "https://github.com/Scimon/raku-BTree.git",
+  "source-url": "https://github.com/Scimon/raku-Tree-Binary.git",
   "tags": [
   ],
   "test-depends": [
