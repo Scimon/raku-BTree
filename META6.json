@@ -12,10 +12,10 @@
   "name": "Tree::Binary",
   "perl": "6.d",
   "provides": {
-    "BTree": "lib/BTree.rakumod",
-    "BTree::Grammar": "lib/BTree/Grammar.rakumod",
-    "BTree::PrettyTree": "lib/BTree/PrettyTree.rakumod",
-    "BTree::Renderer": "lib/BTree/Renderer.rakumod"
+    "Tree::Binary": "lib/Tree/Binary.rakumod",
+    "Tree::Binary::Grammar": "lib/Tree/Binary/Grammar.rakumod",
+    "Tree::Binary::PrettyTree": "lib/Tree/Binary/PrettyTree.rakumod",
+    "Tree::Binary::Role::Renderer": "lib/Tree/Binary/Role/Renderer.rakumod"
   },
   "resources": [
   ],
