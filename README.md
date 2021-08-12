@@ -3,14 +3,14 @@
 NAME
 ====
 
-Tree::Binary - Simple Binary Tree Role with pretty printing
+Tree::Binary - Roles for building and traversing binary trees
 
 SYNOPSIS
 ========
 
 ```raku
 use Tree::Binary;
-class IntTree does Tree::Binary[Int] {};
+class IntTree does Tree::Binary::Role::BinaryTree[Int] {};
 my IntTree(Str) $tree = "1(2)(3)";
 say $tree;
 ```
@@ -22,15 +22,15 @@ say $tree;
 DESCRIPTION
 ===========
 
-Tree::Binary is intended to be a simple role that can be used to represent binary trees. It's intended to be a basis for a series of different types for trees. 
+Tree::Binary is intended to be a framework that can be used as the basis for building binary trees. The core `Role` provided is `Tree::Binary::Role::BinaryTree` which encapsulates binary tree storage, traversing, parsing and rendering.
 
-Tree::Binary does not include code for inserting or deleting nodes as this is dependent on the concreate class using it. 
+`Tree::Binary::Role::BinaryTree` does not include code for inserting or deleting nodes as this is dependent on the concreate class using it. 
 
 Tree::Binary
 ------------
 
 ```raku
-role Tree::Binary[
+role Tree::Binary::Role::BinaryTree[
     ::ValueType=Any,
     Tree::Binary::Role::Renderer :$gist-renderer=Tree::Binary::PrettyTree,
     Tree::Binary::Role::Renderer :$Str-renderer=BasicStrRenderer,
@@ -41,15 +41,21 @@ The Tree::Binary `Role` accepts one postional and two named parameters :
 
 **ValueType**
 
-The type of object it should allow (defaulting to Any)
+
+
+The type of object it should allow (defaulting to Any) 
 
 **:$gist-renderer**
 
-An output renderer used for creating the Tree::Binary's gist representation. The default for this is Tree::Binary::PrettyTree but any class that does Tree::Binary::Role::Renderer will work.
+
+
+An output renderer used for creating the `Tree::Binary::Role::BinaryTree`'s gist representation. The default for this is `Tree::Binary::PrettyTree` but any class that does `Tree::Binary::Role::Renderer` will work.
 
 **:$Str-renderer**
 
-An output renderer used for creating the Tree::Binary's Str representation. The default for this is BasicStrRenderer but any class that does Tree::Binary::Role::Renderer will work.
+
+
+An output renderer used for creating the `Tree::Binary::Role::BinaryTree`'s Str representation. The default for this is `BasicStrRenderer` but any class that does `Tree::Binary::Role::Renderer` will work.
 
 ### Construction
 
@@ -59,9 +65,9 @@ The default constructor takes two named arguments :
 
 The value of the current node
 
-**Array[Tree::Binary] :@nodes[2]**
+**Array[Tree::Binary::Role::BinaryTree] :@nodes[2]**
 
-An array of 0-2 Tree::Binary nodes that are the children of the current node.
+An array of 0-2 Tree::Binary::Role::BinaryTree nodes that are the children of the current node.
 
 The role also allows for basic string coercion where a tree can be represented with the following structure.
 
@@ -79,22 +85,20 @@ my Tree::Binary(Str) $tree1 = "1(a)(£)";
 my $tree2 = Tree::Binary.from-Str("1(a)(£)");
 ```
 
-### Attributes
+Attributes
+----------
 
-### has ValueType $.value
-
-The current nodes value
-
-### has Positional[Tree::Binary::Role::Tree::Binary] @!nodes
+### has Positional[Tree::Binary::Role::BinaryTree] @!nodes
 
 The child nodes
 
-### Methods
+Methods
+-------
 
 ### method nodes
 
 ```raku
-method nodes() returns Array[Tree::Binary::Role::Tree::Binary]
+method nodes() returns Array[Tree::Binary::Role::BinaryTree]
 ```
 
 The child nodes of this node, undefined nodes will not be returned.
@@ -154,7 +158,7 @@ Returns a raku representation of the tree
 ### method reverse
 
 ```raku
-method reverse() returns Tree::Binary::Role::Tree::Binary
+method reverse() returns Tree::Binary::Role::BinaryTree
 ```
 
 Returns a new Tree::Binary where the node pairs have been swapped at each level
@@ -164,7 +168,7 @@ Returns a new Tree::Binary where the node pairs have been swapped at each level
 ```raku
 method from-Str(
     Str $in
-) returns Tree::Binary::Role::Tree::Binary
+) returns Tree::Binary::Role::BinaryTree
 ```
 
 Object creation method using the Str coercion rules.

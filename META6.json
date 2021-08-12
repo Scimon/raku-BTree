@@ -7,7 +7,7 @@
   ],
   "depends": [
   ],
-  "description": "Simple Binary Tree Role with pretty printing",
+  "description": "Roles for building and traversing binary trees",
   "license": "Artistic-2.0",
   "name": "Tree::Binary",
   "perl": "6.d",
@@ -15,6 +15,7 @@
     "Tree::Binary": "lib/Tree/Binary.rakumod",
     "Tree::Binary::Grammar": "lib/Tree/Binary/Grammar.rakumod",
     "Tree::Binary::PrettyTree": "lib/Tree/Binary/PrettyTree.rakumod",
+    "Tree::Binary::Role::BinaryTree": "lib/Tree/Binary/Role/BinaryTree.rakumod",
     "Tree::Binary::Role::Renderer": "lib/Tree/Binary/Role/Renderer.rakumod"
   },
   "resources": [

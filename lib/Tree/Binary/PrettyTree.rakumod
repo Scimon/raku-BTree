@@ -7,12 +7,12 @@ class PrettyTree does Tree::Binary::Role::Renderer is export {
     has @.data;
     has UInt $.join-point;
 
-    multi submethod BUILD ( Tree::Binary :$tree where { ! $tree.elems } ) {
+    multi submethod BUILD ( Tree::Binary::Role::BinaryTree :$tree where { ! $tree.elems } ) {
         @!data = [$tree.value.Str];
         $!join-point = $tree.value.Str.codes div 2;
     }
     
-    multi submethod BUILD ( Tree::Binary :$tree ) {
+    multi submethod BUILD ( Tree::Binary::Role::BinaryTree :$tree ) {
         my ( $left, $right, $left-width, $right-width );
         my ( @ldata, @rdata, $left-pad, $right-pad );
         

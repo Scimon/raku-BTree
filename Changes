@@ -1,6 +1,10 @@
-Revision history for BTree
+Revision history for Tree::Binary (Formerly BTree)
 
 {{$NEXT}}
+
+0.0.4
+    - Keeping Tree::Binary as top level namespace
+    - Moving the Role around and updating some documentation
 
 0.0.3
     - Renamed to Tree::Binary
