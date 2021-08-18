@@ -37,7 +37,7 @@ role Tree::Binary::Role::BinaryTree[
 ]
 ```
 
-The Tree::Binary `Role` accepts one postional and two named parameters : 
+The Tree::Binary::Role::BinaryTree `Role` accepts one postional and two named parameters : 
 
 **ValueType**
 

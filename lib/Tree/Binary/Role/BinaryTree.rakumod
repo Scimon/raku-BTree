@@ -49,7 +49,7 @@ role Tree::Binary::Role::BinaryTree[
 ]
 =end code
 
-The Tree::Binary C<Role> accepts one postional and two named parameters : 
+The Tree::Binary::Role::BinaryTree C<Role> accepts one postional and two named parameters : 
 
 =defn ValueType 
 
