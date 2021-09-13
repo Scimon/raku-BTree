@@ -14,6 +14,7 @@
   "provides": {
     "Tree::Binary": "lib/Tree/Binary.rakumod",
     "Tree::Binary::Enums": "lib/Tree/Binary/Enums.rakumod",
+    "Tree::Binary::HasNodes": "lib/Tree/Binary/HasNodes.rakumod",
     "Tree::Binary::Grammar": "lib/Tree/Binary/Grammar.rakumod",
     "Tree::Binary::Iterator": "lib/Tree/Binary/Iterator.rakumod",
     "Tree::Binary::PrettyTree": "lib/Tree/Binary/PrettyTree.rakumod",
