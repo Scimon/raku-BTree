@@ -48,4 +48,6 @@ is $iterator.pull-one(), 6;
 is $iterator.pull-one(), 7;
 is $iterator.pull-one(), IterationEnd;
 
+is $tree.map( {$_} ), [1,2,3];
+
 done-testing;

@@ -13,7 +13,9 @@
   "perl": "6.d",
   "provides": {
     "Tree::Binary": "lib/Tree/Binary.rakumod",
+    "Tree::Binary::Enums": "lib/Tree/Binary/Enums.rakumod",
     "Tree::Binary::Grammar": "lib/Tree/Binary/Grammar.rakumod",
+    "Tree::Binary::Iterator": "lib/Tree/Binary/Iterator.rakumod",
     "Tree::Binary::PrettyTree": "lib/Tree/Binary/PrettyTree.rakumod",
     "Tree::Binary::Role::BinaryTree": "lib/Tree/Binary/Role/BinaryTree.rakumod",
     "Tree::Binary::Role::Renderer": "lib/Tree/Binary/Role/Renderer.rakumod"
@@ -25,5 +27,5 @@
   ],
   "test-depends": [
   ],
-  "version": "0.0.4"
+  "version": "0.0.5"
 }

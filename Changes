@@ -2,6 +2,11 @@ Revision history for Tree::Binary (Formerly BTree)
 
 {{$NEXT}}
 
+0.0.5
+    - Adding an Iterator and making the Tree and Iterable.
+    - Defaults to Depth First Left to Right traversal but can be modified as
+    an attribute at creation.
+
 0.0.4
     - Keeping Tree::Binary as top level namespace
     - Moving the Role around and updating some documentation

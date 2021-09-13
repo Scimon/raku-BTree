@@ -2,7 +2,10 @@ unit package Tree::Binary::Role;
 
 use Tree::Binary::PrettyTree;
 use Tree::Binary::Role::Renderer;
+use Tree::Binary::Role::HasNodes;
 use Tree::Binary::Grammar;
+use Tree::Binary::Iterator;
+use Tree::Binary::Enums;
 
 =begin pod
 
@@ -125,8 +128,10 @@ class BasicStrRenderer does Tree::Binary::Role::Renderer {
 role BinaryTree[
     ::ValueType = Any, 
     Tree::Binary::Role::Renderer :$gist-renderer = PrettyTree,
-    Tree::Binary::Role::Renderer :$Str-renderer  = BasicStrRenderer, 
-] is export {
+    Tree::Binary::Role::Renderer :$Str-renderer  = BasicStrRenderer,
+    TraverseType :$traverse-type = DepthFirst,
+    TraverseDirection :$traverse-direction = LeftToRight
+] is export does HasNodes does Iterable {
 
     #|The Type of node values (default to Any)
     has ValueType $.value is required;
@@ -149,6 +154,13 @@ role BinaryTree[
         @!nodes = @nodes;
     }
     
+    method iterator {
+        return Tree::Binary::Iterator.new( 
+            tree => self, 
+            :$traverse-type, 
+            :$traverse-direction 
+        );
+    }
 
     #|( Returns the number of defined nodes for the current node.
     Note that the elems method does NOT return the count of all nodes 

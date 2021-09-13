@@ -1,10 +1,10 @@
 unit package Tree::Binary;
 
-use Tree::Binary::Role::BinaryTree;
 use Tree::Binary::Enums;
+use Tree::Binary::Role::HasNodes;
 
 class Iterator does Iterator {
-    has Tree::Binary::Role::BinaryTree $!tree;
+    has Tree::Binary::Role::HasNodes $!tree;
     has TraverseType $!traverse-type = DepthFirst;
     has TraverseDirection $!traverse-direction = LeftToRight;
     has @!nodes;

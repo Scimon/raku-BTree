@@ -1,4 +1,4 @@
-unit package Tree::Binary:ver<0.0.4>:auth<zef:Scimon>;
+unit package Tree::Binary:ver<0.0.5>:auth<zef:Scimon>;
 
 use Tree::Binary::PrettyTree;
 use Tree::Binary::Role::Renderer;
