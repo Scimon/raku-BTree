@@ -8,8 +8,8 @@ my IntTree(Str) $tree = "1(2)(3)";
 
 ok my $iterator = Tree::Binary::Iterator.new( :$tree );
 
-is $iterator.pull-one(), 1;
 is $iterator.pull-one(), 2;
+is $iterator.pull-one(), 1;
 is $iterator.pull-one(), 3;
 is $iterator.pull-one(), IterationEnd;
 
@@ -17,14 +17,27 @@ $iterator = Tree::Binary::Iterator.new(
     :$tree, 
     traverse-direction => Tree::Binary::RightToLeft );
 
-is $iterator.pull-one(), 1;
 is $iterator.pull-one(), 3;
+is $iterator.pull-one(), 1;
 is $iterator.pull-one(), 2;
 is $iterator.pull-one(), IterationEnd;
 
 my IntTree(Str) $tree2 = "1(2(3)(4))(5(6)(7))";
 
 $iterator = Tree::Binary::Iterator.new( tree => $tree2 );
+
+is $iterator.pull-one(), 3;
+is $iterator.pull-one(), 2;
+is $iterator.pull-one(), 4;
+is $iterator.pull-one(), 1;
+is $iterator.pull-one(), 6;
+is $iterator.pull-one(), 5;
+is $iterator.pull-one(), 7;
+is $iterator.pull-one(), IterationEnd;
+
+$iterator = Tree::Binary::Iterator.new( 
+    tree => $tree2,
+    traverse-type => Tree::Binary::PreOrder );
 
 is $iterator.pull-one(), 1;
 is $iterator.pull-one(), 2;
@@ -37,17 +50,17 @@ is $iterator.pull-one(), IterationEnd;
 
 $iterator = Tree::Binary::Iterator.new( 
     tree => $tree2,
-    traverse-type => Tree::Binary::BreadthFirst );
+    traverse-type => Tree::Binary::PostOrder );
 
-is $iterator.pull-one(), 1;
-is $iterator.pull-one(), 2;
-is $iterator.pull-one(), 5;
 is $iterator.pull-one(), 3;
 is $iterator.pull-one(), 4;
+is $iterator.pull-one(), 2;
 is $iterator.pull-one(), 6;
 is $iterator.pull-one(), 7;
+is $iterator.pull-one(), 5;
+is $iterator.pull-one(), 1;
 is $iterator.pull-one(), IterationEnd;
 
-is $tree.map( {$_} ), [1,2,3];
+is $tree.map( {$_} ), [2,1,3];
 
 done-testing;

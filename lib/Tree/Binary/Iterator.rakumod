@@ -5,12 +5,12 @@ use Tree::Binary::Role::HasNodes;
 
 class Iterator does Iterator {
     has Tree::Binary::Role::HasNodes $!tree;
-    has TraverseType $!traverse-type = DepthFirst;
+    has TraverseType $!traverse-type = InOrder;
     has TraverseDirection $!traverse-direction = LeftToRight;
     has @!nodes;
 
     method BUILD ( :$!tree, 
-                   :$!traverse-type = DepthFirst, 
+                   :$!traverse-type = InOrder, 
                    :$!traverse-direction = LeftToRight ) {
     }
 
@@ -20,20 +20,29 @@ class Iterator does Iterator {
 
     method pull-one() {
         return IterationEnd unless @!nodes.elems; 
-        my $tree =  @!nodes.shift;
-        self!add-nodes( $tree );
-        return $tree.value;
+        my $next = @!nodes.shift;
+        while ( $next ~~ Tree::Binary::Role::HasNodes ) {
+            self!add-nodes( $next );
+            $next = @!nodes.shift;
+        }
+        return $next;
     }
 
     method !add-nodes( $tree ) {
-        my @children = $tree.nodes;
+        my @children = $tree.?nodes // [];
         @children .=reverse if $!traverse-direction == RightToLeft;
         given $!traverse-type {
-            when DepthFirst {
-                @!nodes.unshift(|@children);
+            when PreOrder {
+                @!nodes.unshift($tree.value, |@children);
             }
-            when BreadthFirst {
-                @!nodes.push(|@children);
+            when PostOrder {
+                @!nodes.unshift(|@children, $tree.value);
+            }
+            default {
+                @!nodes.unshift(@children[1]) if @children.elems == 2;
+                @!nodes.unshift($tree.?value // $tree);
+                @!nodes.unshift(@children[0]) if @children;
+
             }
         }
     }

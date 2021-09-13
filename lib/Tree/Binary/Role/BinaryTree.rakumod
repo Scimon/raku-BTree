@@ -129,7 +129,7 @@ role BinaryTree[
     ::ValueType = Any, 
     Tree::Binary::Role::Renderer :$gist-renderer = PrettyTree,
     Tree::Binary::Role::Renderer :$Str-renderer  = BasicStrRenderer,
-    TraverseType :$traverse-type = DepthFirst,
+    TraverseType :$traverse-type = InOrder,
     TraverseDirection :$traverse-direction = LeftToRight
 ] is export does HasNodes does Iterable {
 
