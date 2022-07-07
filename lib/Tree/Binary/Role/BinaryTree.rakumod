@@ -49,10 +49,12 @@ role Tree::Binary::Role::BinaryTree[
     ::ValueType=Any,
     Tree::Binary::Role::Renderer :$gist-renderer=Tree::Binary::PrettyTree,
     Tree::Binary::Role::Renderer :$Str-renderer=BasicStrRenderer,
+    Tree::Binary::TraverseType :$traverse-type=Tree::Binary::TraverseType::InOrder,
+    Tree::Binary::TraverseDirection :$traverse-direction=Tree::Binary::TraverseDirection::LeftToRight,
 ]
 =end code
 
-The Tree::Binary::Role::BinaryTree C<Role> accepts one postional and two named parameters : 
+The Tree::Binary::Role::BinaryTree C<Role> accepts one postional and four named parameters : 
 
 =defn ValueType 
 
@@ -71,6 +73,17 @@ An output renderer used for creating the  C<Tree::Binary::Role::BinaryTree>'s
 Str representation. 
 The default for this is C<BasicStrRenderer> but any class that does 
 C<Tree::Binary::Role::Renderer> will work.
+
+=defn :$traverse-type
+
+How the tree should be iterated one of C<Tree::Binary::Enums::TraverseType> 
+defaults to C<Tree::Binary::TraverseType::InOrder>
+
+=defn :$traverse-direction
+
+The direction the tree should be iterated one of 
+C<Tree::Binary::Enums::TraverseDirection> defaults to 
+C<Tree::Binary::TraverseDirection::LeftToRight>
 
 =head3 Construction
 
@@ -154,7 +167,7 @@ role BinaryTree[
         @!nodes = @nodes;
     }
     
-    method iterator {
+    method iterator (Tree::Binary::Role::BinaryTree:D :) {
         return Tree::Binary::Iterator.new( 
             tree => self, 
             :$traverse-type, 
@@ -194,12 +207,12 @@ role BinaryTree[
     }
 
     #| Returns a Str representation of the tree using the :$Str-renderer parameter 
-    method Str(--> Str ) {
+    multi method Str(::?CLASS:D: --> Str ) {
         $Str-renderer.new( tree=>self ).render();
     }
 
     #| Returns the gist for this tree using the defined $gist-renderer parameter
-    method gist(--> Str) {
+    multi method gist(::?CLASS:D: --> Str) {
         $gist-renderer.new( tree=>self ).render();
     }
     

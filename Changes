@@ -1,8 +1,12 @@
 Revision history for Tree::Binary (Formerly BTree)
 
 {{$NEXT}}
+
+0.0.7  2022-07-07T11:55:22+01:00
+    - Documentation Iteration options
+    - Fix gist and Raku Class methods
 0.0.6
-    - Fix iteration... not InOrder, PostOrder and PreOrder options to traversal
+    - Fix iteration... note InOrder, PostOrder and PreOrder options to traversal
 
 0.0.5
     - Adding an Iterator and making the Tree and Iterable.

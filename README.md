@@ -34,10 +34,12 @@ role Tree::Binary::Role::BinaryTree[
     ::ValueType=Any,
     Tree::Binary::Role::Renderer :$gist-renderer=Tree::Binary::PrettyTree,
     Tree::Binary::Role::Renderer :$Str-renderer=BasicStrRenderer,
+    Tree::Binary::TraverseType :$traverse-type=Tree::Binary::TraverseType::InOrder,
+    Tree::Binary::TraverseDirection :$traverse-direction=Tree::Binary::TraverseDirection::LeftToRight,
 ]
 ```
 
-The Tree::Binary::Role::BinaryTree `Role` accepts one postional and two named parameters : 
+The Tree::Binary::Role::BinaryTree `Role` accepts one postional and four named parameters : 
 
 **ValueType**
 
@@ -56,6 +58,18 @@ An output renderer used for creating the `Tree::Binary::Role::BinaryTree`'s gist
 
 
 An output renderer used for creating the `Tree::Binary::Role::BinaryTree`'s Str representation. The default for this is `BasicStrRenderer` but any class that does `Tree::Binary::Role::Renderer` will work.
+
+**:$traverse-type**
+
+
+
+How the tree should be iterated one of `Tree::Binary::Enums::TraverseType` defaults to `Tree::Binary::TraverseType::InOrder`
+
+**:$traverse-direction**
+
+
+
+The direction the tree should be iterated one of `Tree::Binary::Enums::TraverseDirection` defaults to `Tree::Binary::TraverseDirection::LeftToRight`
 
 ### Construction
 
